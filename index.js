@@ -5,10 +5,11 @@ const fs = require('fs');
 const url = "https://storage.googleapis.com/jus-challenges/challenge-crawler.html";
 
 function extractTextFromTd($element, searchText) {
-    return $element.find(`strong:contains("${searchText}:")`).parent().contents()
+    const text = $element.find(`strong:contains("${searchText}:")`).parent().contents()
         .filter((i, el) => el.nodeType === 3)
         .text()
         .trim();
+    return text.replace(/\s+/g, ' ');
 }
 
 async function scrapeData() {
